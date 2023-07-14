@@ -20,9 +20,35 @@ if ($_POST["password"] !== $_POST["confirm_password"]) {
     die("Passwords do not match");
 }
 
+//Creates a hash of the submitted password
 $hashed_password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
+//Makes this script require the database_connect script
 $sql_var = require __DIR__ . "/database_connect.php";
 
-print_r($_POST);
-var_dump($hashed_password);
+//MySQL statement for inserting user info into the database
+$sql_statement = "INSERT INTO user (name, email, hash_password) VALUES (?,?,?)";
+
+//Initialing SQL statement
+$prepared_statement = $sql_var->stmt_init();
+
+//Preparing SQL statement for execution
+$prepared_statement->prepare($sql_statement);
+
+//Binding values to placehoders in $sql_statement
+$prepared_statement->bind_param("sss", $_POST["name"], $_POST["email"], $hashed_password);
+
+
+//Inserts the values into the database.
+//Checks if the email is already registered -----------------------> this does not work - fatal error if email already registered.
+if ($prepared_statement->execute()) {
+    
+    //Redirects once completed
+    header("Location: successful_signup.html");
+    exit;
+    
+} else {
+    echo "Email already registered";
+}
+
+
