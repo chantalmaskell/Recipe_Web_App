@@ -1,6 +1,6 @@
 <?php
 
-//Creates a session via cookies
+//Creates or resumes a session via cookies
 session_start();
 
 ?>
@@ -20,6 +20,8 @@ session_start();
     <?php if (isset($_SESSION["user_id"])): ?>
 
         <p>You are now logged in</p>
+        <!--Allows the user to log out-->
+        <p><a href="logout.php">Log out</a></p>
 
     <!--Gives the user links to log in or sign up-->
     <?php else: ?>
