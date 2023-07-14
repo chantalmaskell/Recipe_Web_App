@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>Recipe Search</h1>
+  <div id="formContainer">
+    <form id="recipeForm">
+      <select id="searchType" onchange="updateSearchInput(this.value)">
+        <option value="name">Recipe Name</option>
+        <option value="ingredient">Ingredient</option>
+        <option value="category">Category</option>
+      </select>
+      <input type="text" id="searchInput" placeholder="Enter search term...">
+      <select id="categorySelect" style="display: none;">
+        <!-- Categories options will be populated in script.js -->
+      </select>
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  <div id="recipeContainer">
+    <!-- Recipes will be inserted here -->
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
