@@ -15,6 +15,13 @@ session_start();
 <body>
 
     <h1>Home</h1>
+                    <!-- search box for texting finding the recipes -->
+        <section>
+        <form action="search.php" method="GET">
+        <input type="text" name="search" placeholder="Search for recipes">
+        <button type="submit">Search</button>
+        </form>
+        </section>
 
     <!--Checks if session data is stored-->
     <?php if (isset($_SESSION["user_id"])): ?>
