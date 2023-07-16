@@ -23,7 +23,7 @@ if ($_POST["password"] !== $_POST["confirm_password"]) {
 //Creates a hash of the submitted password
 $hashed_password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-//Makes this script require the database_connect script
+//Makes this script require the database_connect script. Ensures a connection with the database.
 $sql_var = require __DIR__ . "/database_connect.php";
 
 //MySQL statement for inserting user info into the database
@@ -46,7 +46,7 @@ if ($prepared_statement->execute()) {
     //Redirects once completed
     header("Location: successful_signup.html");
     exit;
-    
+
 } else {
     echo "Email already registered";
 }
