@@ -15,7 +15,7 @@ session_start();
 <body>
 
     <h1>Home</h1>
-                    <!-- search box for texting finding the recipes -->
+         <!-- search box for texting finding the recipes -->
         <section>
         <form action="search.php" method="GET">
         <input type="text" name="search" placeholder="Search for recipes">
