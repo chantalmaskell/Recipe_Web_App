@@ -51,6 +51,7 @@ if (isset($_GET['search'])) {
         <input type="text" name="search" placeholder="Search for recipes">
         <button type="submit">Search</button>
     </form>
+    <p><a href="logout.php">Log out</a></p>
 
     <!-- Display the search results -->
     <div class="search-results">
@@ -68,6 +69,7 @@ if (isset($_GET['search'])) {
         <?php endif; ?>
     </div>
 
+    
     <!-- Additional HTML and CSS for the search results page to be added -->
 
     <?php
