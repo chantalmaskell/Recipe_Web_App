@@ -1,5 +1,16 @@
 <?php
 
+
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // User is not logged in, redirect to login page or display a message
+    header("Location: login_page.php");
+    
+    exit();
+}
+
 // Function to establish a database connection
 function connectToDatabase() {
     $host = 'localhost'; 
