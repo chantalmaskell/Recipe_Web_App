@@ -73,6 +73,7 @@ if (isset($_GET['search'])) {
                     <p><?php echo $recipe['description']; ?></p>
                    <p><?php echo $recipe['ingredients']; ?></p>
                     <!-- Display other recipe information like categories, ratings, etc. -->
+                    <button class="save-button">Save</button>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>

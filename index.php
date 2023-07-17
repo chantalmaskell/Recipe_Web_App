@@ -29,6 +29,19 @@ session_start();
         <p>You are now logged in</p>
         <!--Allows the user to log out-->
         <p><a href="logout.php">Log out</a></p>
+        <section>
+            <!-- HTML and other content for the account page -->
+            <h2>Saved Recipes</h2>
+            <ul>
+                <?php if (isset($savedRecipes) && count($savedRecipes) > 0) : ?>
+                    <?php foreach ($savedRecipes as $recipe) : ?>
+                        <li><?php echo $recipe['recipe_name']; ?></li>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <li>No saved recipes found.</li>
+                <?php endif; ?>
+            </ul>
+        </section>
 
     <!--Gives the user links to log in or sign up-->
     <?php else: ?>
