@@ -1,14 +1,6 @@
 // Function to handle the "Save" button click
 function handleSaveButtonClick(recipeId, userId) {
     // Check if the user is logged in
-    var isLoggedIn = false;
-
-    // If the variable from index.php is defined, use its value
-    if (typeof window.isLoggedIn !== 'undefined') {
-        isLoggedIn = window.isLoggedIn;
-    }
-
-    // If the user is logged in, save the recipe
     if (isLoggedIn) {
         // Send a request to the server to save the recipe
         var xhttp = new XMLHttpRequest();

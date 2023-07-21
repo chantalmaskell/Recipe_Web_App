@@ -106,6 +106,10 @@ if (isset($_GET['search'])) {
         <?php endif; ?>
     </div>
 
+    <!-- Assign the login status to a JavaScript variable -->
+    <script>
+        var isLoggedIn = <?php echo isset($_SESSION["user_id"]) ? "true" : "false"; ?>;
+    </script>
     <!-- Include the external script.js file -->
     <script src="script.js"></script>
 </body>
