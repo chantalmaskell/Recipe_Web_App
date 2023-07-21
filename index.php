@@ -69,7 +69,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'save_recipe') {
         <?php
         // Include the database connection file (MySQLi version)
         require_once 'database_connect.php';
-        // Assuming you have a $sql_object representing the database connection
+
         // Retrieve recipes from the database
         $sql = "SELECT * FROM recipes"; // Modify this query according to your database structure
         $result = $sql_object->query($sql);

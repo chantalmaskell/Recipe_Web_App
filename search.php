@@ -24,6 +24,12 @@ function connectToDatabase()
 require_once 'database_connect.php';
 $pdo = connectToDatabase();
 
+// Function to check if the user is logged in
+function isUserLoggedIn()
+{
+    return isset($_SESSION["user_id"]);
+}
+
 // Check if the search form has been submitted
 if (isset($_GET['search'])) {
     // Get the search query from the form
@@ -58,6 +64,7 @@ if (isset($_GET['search'])) {
         <input type="text" name="search" placeholder="Search for recipes">
         <button type="submit">Search</button>
     </form>
+
     <!--Checks if session data is stored-->
     <?php if (isset($_SESSION["user_id"])) : ?>
 
@@ -80,10 +87,18 @@ if (isset($_GET['search'])) {
                         <p>Ingredients: <?php echo $recipe['Ingredients']; ?></p>
                     <?php else : ?>
                         <p>No ingredients available for this recipe.</p>
-
                     <?php endif; ?>
-                    <!-- Display other recipe information like categories, ratings, etc. -->
-                    <button class="save-button">Save</button>
+
+                    <!-- Display the "Save" button with the recipe ID and user ID as data attributes -->
+                    <?php
+                    // Check if the user is logged in and show the "Save" button accordingly
+                    if (isUserLoggedIn()) {
+                        echo "<button class='save-button' data-recipe-id='" . $recipe['recipe_id'] . "' data-user-id='" . $_SESSION["user_id"] . "'>Save</button>";
+                    } else {
+                        echo "<p>Please <a href='login_page.php'>log in</a> to save this recipe.</p>";
+                    }
+                    ?>
+
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
@@ -91,12 +106,8 @@ if (isset($_GET['search'])) {
         <?php endif; ?>
     </div>
 
-    <!-- Additional HTML and CSS for the search results page to be added -->
-
-    <?php
-    // Include the necessary files and footer
-    // require_once 'includes/footer.php';
-    ?>
+    <!-- Include the external script.js file -->
+    <script src="script.js"></script>
 </body>
 
 </html>
