@@ -73,7 +73,7 @@ if (isset($_GET['search'])) {
         <p><a href="logout.php">Log out</a></p>
         <!--Gives the user links to log in or sign up-->
     <?php else : ?>
-        <p>Please <a href="login_page.php">log in</a> or <a href="signup_form.html">sign up</a></p>
+        <p>Please <a href="login_page.php">Log In</a> or <a href="signup_form.html">Sign Up</a></p>
     <?php endif; ?>
 
     <!-- Display the search results -->

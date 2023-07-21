@@ -1,3 +1,5 @@
+//JS file to handle the save button while calling the backend and storing the necessary information.
+
 // Function to handle the "Save" button click
 function handleSaveButtonClick(recipeId, userId) {
     // Check if the user is logged in

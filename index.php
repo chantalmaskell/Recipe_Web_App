@@ -62,7 +62,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'save_recipe') {
         <p><a href="logout.php">Log out</a></p>
         <!--Gives the user links to log in or sign up-->
     <?php else : ?>
-        <p>Please <a href="login_page.php">log in</a> or <a href="signup_form.html">sign up</a></p>
+        <p>Please <a href="login_page.php">Log In</a> or <a href="signup_form.html">Sign Up</a></p>
     <?php endif; ?>
 
     <div>
@@ -77,8 +77,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'save_recipe') {
         if ($result->num_rows > 0) {
             // Fetch and display the recipes
             while ($recipe = $result->fetch_assoc()) {
-                // Display the recipe information as needed
-                // Add other recipe details (description, ingredients, etc.)
+                // Display the recipe information as needed recipe details (description, ingredients, etc.)
                 echo "<div class='recipe-card'>";
                 echo "<h3>" . $recipe['Name'] . "</h3>";
                 echo "<p>" . $recipe['Description'] . "</p>";
