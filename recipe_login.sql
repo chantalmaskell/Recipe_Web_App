@@ -675,6 +675,19 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Table structure for table `saved_recipes`
+--
+
+CREATE TABLE saved_recipes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    recipe_id INT NOT NULL,
+    saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id)
+);
+
+--
 -- Dumping data for table `user`
 --
 
