@@ -3,13 +3,7 @@
 
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    // User is not logged in, redirect to login page or display a message
-    header("Location: login_page.php");
 
-    exit();
-}
 
 // Function to establish a database connection
 function connectToDatabase()
@@ -69,7 +63,16 @@ if (isset($_GET['search'])) {
         <input type="text" name="search" placeholder="Search for recipes">
         <button type="submit">Search</button>
     </form>
-    <p><a href="logout.php">Log out</a></p>
+    <!--Checks if session data is stored-->
+    <?php if (isset($_SESSION["user_id"])) : ?>
+
+        <p>You are now logged in</p>
+        <!--Allows the user to log out-->
+        <p><a href="logout.php">Log out</a></p>
+        <!--Gives the user links to log in or sign up-->
+    <?php else : ?>
+        <p>Please <a href="login_page.php">log in</a> or <a href="signup_form.html">sign up</a></p>
+    <?php endif; ?>
 
     <!-- Display the search results -->
     <div class="search-results">
