@@ -1,9 +1,5 @@
 <?php
-
-
 session_start();
-
-
 
 // Function to establish a database connection
 function connectToDatabase()
@@ -23,7 +19,6 @@ function connectToDatabase()
         die();
     }
 }
-
 
 // Include the necessary files and establish the database connection
 require_once 'database_connect.php';
@@ -95,8 +90,6 @@ if (isset($_GET['search'])) {
             <p>No recipes found. Please try a different search query.</p>
         <?php endif; ?>
     </div>
-
-
 
     <!-- Additional HTML and CSS for the search results page to be added -->
 

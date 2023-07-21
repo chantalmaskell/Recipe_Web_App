@@ -103,40 +103,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'save_recipe') {
     </div>
 
 
-    <!-- JavaScript code to handle the "Save" button click -->
+    <!-- Assign the login status to a JavaScript variable -->
     <script>
-        // Function to handle the "Save" button click
-        function handleSaveButtonClick(recipeId, userId) {
-            // Check if the user is logged in
-            var isLoggedIn = <?php echo isset($_SESSION["user_id"]) ? "true" : "false"; ?>;
-
-            // If the user is logged in, save the recipe
-            if (isLoggedIn) {
-                // Send a request to the server to save the recipe
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        alert(this.responseText);
-                    }
-                };
-                xhttp.open("GET", "index.php?action=save_recipe&recipe_id=" + recipeId, true);
-                xhttp.send();
-            } else {
-                // If the user is not logged in, show a login message
-                alert("Please log in to save this recipe.");
-            }
-        }
-
-        // Attach click event listeners to all "Save" buttons
-        var saveButtons = document.querySelectorAll(".save-button");
-        saveButtons.forEach(function(button) {
-            button.addEventListener("click", function() {
-                var recipeId = button.dataset.recipeId;
-                var userId = button.dataset.userId;
-                handleSaveButtonClick(recipeId, userId);
-            });
-        });
+        var isLoggedIn = <?php echo isset($_SESSION["user_id"]) ? "true" : "false"; ?>;
     </script>
+
+    <!-- Include the external script.js file -->
+    <script src="script.js"></script>
+
+
 
 </body>
 </head>
