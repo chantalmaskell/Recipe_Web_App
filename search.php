@@ -89,13 +89,30 @@ if (isset($_GET['search'])) {
                         <p>No ingredients available for this recipe.</p>
                     <?php endif; ?>
 
-                    <!-- Display the "Save" button with the recipe ID and user ID as data attributes -->
+                    <!-- Display the "Save" or "Remove" button with the recipe ID as a data attribute -->
                     <?php
-                    // Check if the user is logged in and show the "Save" button accordingly
+                    // Check if the user is logged in
                     if (isUserLoggedIn()) {
-                        echo "<button class='save-button' data-recipe-id='" . $recipe['recipe_id'] . "' data-user-id='" . $_SESSION["user_id"] . "'>Save</button>";
+                        // Check if the recipe is saved for the logged-in user
+                        $isSaved = false;
+                        if (isset($_SESSION["user_id"])) {
+                            $userId = $_SESSION["user_id"];
+                            $recipeId = $recipe['recipe_id'];
+
+                            $sql = "SELECT COUNT(*) FROM saved_recipes WHERE user_id = ? AND recipe_id = ?";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->execute([$userId, $recipeId]);
+                            $isSaved = $stmt->fetchColumn() > 0;
+                        }
+
+                        // Display the "Save" or "Remove" button accordingly
+                        if ($isSaved) {
+                            echo "<button class='remove-button' data-recipe-id='" . $recipe['recipe_id'] . "' data-user-id='" . $_SESSION["user_id"] . "'>Remove</button>";
+                        } else {
+                            echo "<button class='save-button' data-recipe-id='" . $recipe['recipe_id'] . "' data-user-id='" . $_SESSION["user_id"] . "'>Save</button>";
+                        }
                     } else {
-                        echo "<p>Please <a href='login_page.php'>log in</a> to save this recipe.</p>";
+                        echo "<p>Please <a href='login_page.php'>log in</a> to save or remove this recipe.</p>";
                     }
                     ?>
 

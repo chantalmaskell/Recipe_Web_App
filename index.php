@@ -32,6 +32,27 @@ if (isset($_GET['action']) && $_GET['action'] === 'save_recipe') {
         exit; // Exit to prevent displaying the entire HTML page again
     }
 }
+
+// Handle the request to remove a recipe from favorites
+if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
+    // Check if the user is logged in
+    if (isset($_SESSION["user_id"])) {
+        $userId = $_SESSION["user_id"];
+        $recipeId = $_GET['recipe_id'];
+
+        // Remove the recipe from the database
+        $sql = "DELETE FROM saved_recipes WHERE user_id = '$userId' AND recipe_id = '$recipeId'";
+        if ($sql_object->query($sql) === TRUE) {
+            echo "Recipe removed successfully!";
+        } else {
+            echo "Error removing recipe: " . $sql_object->error;
+        }
+        exit; // Exit to prevent displaying the entire HTML page again
+    } else {
+        echo "Please log in to remove this recipe.";
+        exit; // Exit to prevent displaying the entire HTML page again
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -84,9 +105,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'save_recipe') {
                 echo "<p>" . $recipe['Prep_time'] . "</p>";
                 echo "<p>" . $recipe['Cook_time'] . "</p>";
 
-                // Check if the user is logged in and show the "Save" button accordingly
+                // Check if the user is logged in and show the "Save" or "Remove" button accordingly
                 if (isUserLoggedIn()) {
-                    echo "<button class='save-button' data-recipe-id='" . $recipe['recipe_id'] . "'>Save</button>";
+                    // Check if the recipe is saved or not and display the appropriate button
+                    $isSaved = isRecipeSaved($_SESSION["user_id"], $recipe['recipe_id']);
+                    if ($isSaved) {
+                        echo "<button class='remove-button' data-recipe-id='" . $recipe['recipe_id'] . "'>Remove</button>";
+                    } else {
+                        echo "<button class='save-button' data-recipe-id='" . $recipe['recipe_id'] . "'>Save</button>";
+                    }
                 } else {
                     echo "<p>Please <a href='login_page.php'>log in</a> to save this recipe.</p>";
                 }
@@ -110,7 +137,5 @@ if (isset($_GET['action']) && $_GET['action'] === 'save_recipe') {
     <!-- Include the external script.js file -->
     <script src="script.js"></script>
 
-
-
 </body>
-</head>
+</html>
