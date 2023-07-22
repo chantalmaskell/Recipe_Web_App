@@ -61,19 +61,29 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <link rel="stylesheet" href="./global.css">
+    <title>Welcome to Recipe Central | All the taste in one place</title>
 </head>
+
 
 <body>
 
-    <h1>Home</h1>
-    <!-- search box for texting finding the recipes -->
-    <section>
+    <?php include 'primary-navigation.php'?>
+
+
+    <section class="Welcome">
+        <h1>Welcome to Recipe Central</h1>
+        <p>From family favorites to timeless classics. Store and explore 5+ recipes all from one place.</p>
+    <!-- search box for finding the recipes -->
+    <section class="search-bar">
         <form action="search.php" method="GET">
             <input type="text" name="search" placeholder="Search for recipes">
             <button type="submit">Search</button>
         </form>
     </section>
+    </section>
+
+<?php include 'secondary-navigation.php'?>
 
     <!--Checks if session data is stored-->
     <?php if (isset($_SESSION["user_id"])) : ?>

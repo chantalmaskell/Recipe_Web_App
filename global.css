@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #cccccc;
+  }
+
+.recipe-card {
+    padding: 5%;
+    margin: 2%;
+    width: 60%;
+    background-color: rgb(255, 255, 255);
+    align-items: center;
+    justify-content: center;
+}
+  
+  .Welcome {
+    background-color: #f1f1f1;
+    text-align: left;
+    padding: 50px;
+    height: auto;
+    background-image: url('images/healthy-meal.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .Welcome h1 {
+    font-size: 36px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    width: 30%;
+  }
+
+  .Welcome p {
+    font-size: 20px;
+    color: #ffffff;
+    width: 30%;
+
+  }
+  
+  .Welcome form {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    margin-top: 20px;
+    width: 40%;
+  }
+  
+  .Welcome input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    margin-right: 10px;
+  }
+  
+  .Welcome button {
+    padding: 8px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+.secondary-navigation {
+    background-color: #aed3d0;
+    padding: 10px 0;
+  }
+  
+  .secondary-navigation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .secondary-navigation li {
+    margin-right: 20px;
+  }
+  
+  .secondary-navigation li:last-child {
+    margin-right: 0;
+  }
+  
+  .secondary-navigation a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+  }
+  
+  .secondary-navigation a:hover {
+    background-color: #0056b3;
+    border-radius: 5px;
+  }
+  
+  .top-menu-navigation {
+    background-color: #318e88;
+    padding: 10px 0;
+  }
+  
+  .top-menu-navigation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: right;
+  }
+  
+  .top-menu-navigation li {
+    margin-right: 20px;
+  }
+  
+  .top-menu-navigation li:last-child {
+    margin-right: 0;
+  }
+  
+  .top-menu-navigation a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+  }
+  
+  .top-menu-navigation a:hover {
+    background-color: #555;
+    border-radius: 5px;
+  }
