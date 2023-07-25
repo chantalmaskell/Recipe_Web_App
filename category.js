@@ -13,9 +13,8 @@ fetch('/getCategories') // new endpoint which returns all categories
 
 document.getElementById('recipeForm').addEventListener('submit', function(event) {
   event.preventDefault(); // Prevent the form from submitting normally
-  const searchType = document.getElementById('searchType').value;
-  const keyword = (searchType !== 'category') ? document.getElementById('searchInput').value.toLowerCase() : document.getElementById('categorySelect').value;
-  searchRecipes(keyword, searchType);
+  const keyword = document.getElementById('categorySelect').value;
+  searchRecipes(keyword, 'category');
 });
 
 async function searchRecipes(keyword, type) {
