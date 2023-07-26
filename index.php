@@ -110,10 +110,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
             while ($recipe = $result->fetch_assoc()) {
                 // Display the recipe information as needed recipe details (description, ingredients, etc.)
                 echo "<div class='recipe-card'>";
-                echo "<h3>" . $recipe['Name'] . "</h3>";
+                echo "<h3>". $recipe['Name'] . "</h3>";
                 echo "<p>" . $recipe['Description'] . "</p>";
-                echo "<p>" . $recipe['Prep_time'] . "</p>";
-                echo "<p>" . $recipe['Cook_time'] . "</p>";
+                echo "<p>Preparation time: " . $recipe['Prep_time'] . "</p>";
+                echo "<p>Cooking time: " . $recipe['Cook_time'] . "</p>";
 
                 // Check if the user is logged in and show the "Save" or "Remove" button accordingly
                 if (isUserLoggedIn()) {
@@ -147,5 +147,16 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
     <!-- Include the external script.js file -->
     <script src="script.js"></script>
 
+    <footer>
+      <div class="footer-content">
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Browse Recipes</a></li>
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Sign Up</a></li>
+          <li><a href="#">Saved Recipes</a></li>
+        </ul>
+      </div>
+    </footer>
 </body>
 </html>

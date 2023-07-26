@@ -1,17 +1,20 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
     padding: 0;
-    background-color: #cccccc;
+    background-color: #f3f3f3;
+    margin: auto;
   }
 
 .recipe-card {
     padding: 5%;
-    margin: 2%;
     width: 60%;
     background-color: rgb(255, 255, 255);
-    align-items: center;
-    justify-content: center;
+    margin: 2%;
+}
+
+.recipe-card h3 {
+    color: #318e88;
+    font-size: 25px;
 }
   
   .Welcome {
@@ -56,11 +59,15 @@ body {
   
   .Welcome button {
     padding: 8px 15px;
-    background-color: #007BFF;
+    background-color: #318e88;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+  }
+
+  .Welcome button:hover {
+    background-color: #217872;
   }
   
 .secondary-navigation {
@@ -90,11 +97,6 @@ body {
     padding: 10px 20px;
   }
   
-  .secondary-navigation a:hover {
-    background-color: #0056b3;
-    border-radius: 5px;
-  }
-  
   .top-menu-navigation {
     background-color: #318e88;
     padding: 10px 0;
@@ -121,8 +123,154 @@ body {
     text-decoration: none;
     padding: 10px 20px;
   }
-  
-  .top-menu-navigation a:hover {
-    background-color: #555;
+
+.Login {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
     border-radius: 5px;
+    width: 300px;
+    text-align: center;
+}
+
+.Login h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.Login p {
+    color: #282828;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.Login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.Login div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.Login label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.Login input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.Login button {
+    background-color: #318e88;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.Login button:hover {
+    background-color: #217872;
+}
+
+.Signup {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+}
+
+.Signup h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.Signup form {
+    display: flex;
+    flex-direction: column;
+}
+
+.Signup div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.Signup label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.Signup input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.Signup button {
+    background-color: #318e88;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.Signup button:hover {
+    background-color: #217872;
+}
+
+main {
+    padding-bottom: 60px;
+  }
+  
+  footer {
+    margin: auto;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #318e88;
+    color: #fff;
+    padding: 15px 0;
+    text-decoration: none;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .footer-content {
+    text-align: center;
+  }
+  
+  .footer-content p {
+    font-size: 14px;
+  }
+  
+  footer a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: right;
+    padding: 50px;
+    display: block;
   }

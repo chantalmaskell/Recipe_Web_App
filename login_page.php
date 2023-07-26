@@ -44,40 +44,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <link rel="stylesheet" href="./global.css">
+    <title>Login</title>
 </head>
+
 <body>
+    <section class="Login">
+        <h1>Login</h1>
+        <!--Checks the $valid_login variable to see if the login details are correct-->
+        <?php if (! $valid_login): ?>
+            <p>Login invalid</p>
+        <?php endif; ?>
 
-    <h1>Login</h1>
+        <form method="post">
 
-    <!--Checks the $valid_login variable to see if the login details are correct-->
-    <?php if (! $valid_login): ?>
-        <p>Login invalid</p>
-    <?php endif; ?>
+            <!--Area to input email address-->
+            <div>
+                <label for="email">Email address</label>
+                <!--value section keeps user's email displayed after an invalid login attempt-->
+                <input type="email" class="email" name="email" value="<?= htmlspecialchars($_POST["email"] ?? "") ?>">
+            </div>
 
-    <form method="post">
+            <!--Area to input password-->
+            <div>
+                <label for="password">Password</label>
+                <input type="password" class="password" name="password">
+            </div>
 
-        <!--Area to input email address-->
-        <div>
-            <label for="email">Email address</label>
-            <!--value section keeps user's email displayed after an invalid login attempt-->
-            <input type="email" class="email" name="email" value="<?= htmlspecialchars($_POST["email"] ?? "") ?>">
-        </div>
-
-        <!--Area to input password-->
-        <div>
-            <label for="password">Password</label>
-            <input type="password" class="password" name="password">
-        </div>
-
-        <!--Login button-->
-        <button>Log in</button>
-    
-    </form>
-
-    
+            <!--Login button-->
+            <button>Log in</button>
+        
+        </form>
+    </section>
 </body>
 </html>
