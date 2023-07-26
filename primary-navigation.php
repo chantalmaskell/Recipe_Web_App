@@ -1,5 +1,11 @@
 <nav class="top-menu-navigation">
     <ul>
+        <li><section class="search-bar">
+                    <form action="search.php" method="GET">
+                        <input type="text" name="search" placeholder="Search for recipes">
+                        <button type="submit">Search</button>
+                    </form>
+                </section>
         <li><a href="index.php">Home</a></li>
         <li><a href="####">Browse Recipes</a></li>
         <?php if (isset($_SESSION["user_id"])) : ?>

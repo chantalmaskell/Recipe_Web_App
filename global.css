@@ -5,39 +5,90 @@ body {
     margin: auto;
   }
 
-.recipe-card {
-    padding: 5%;
-    width: 60%;
-    background-color: rgb(255, 255, 255);
-    margin: 2%;
+.row {
+    display: flex;
 }
+
+.row h2 {
+    color: #318e88;
+    font-size: 25px;
+}
+  
+  .column {
+    flex: 30%;
+    padding: 3%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+
+/* .container {
+    display: flex;
+    justify-content: center;
+} */
+
+.recipe {
+    flex: 1;
+    display: inline;
+}
+
+.recipe-card {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 5%;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    height: 300px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;}
 
 .recipe-card h3 {
     color: #318e88;
     font-size: 25px;
 }
-  
-  .Welcome {
-    background-color: #f1f1f1;
-    text-align: left;
-    padding: 50px;
-    height: auto;
+
+.left {
+    background-color: #fefefe;
+}
+
+.right {
     background-image: url('images/healthy-meal.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.a {
+    background-color: white;
+}
+
+
+
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+    }
+  }
+  
+  .Welcome {
+    background-color: #ffffff;
+    text-align: left;
+    padding: 30px;
+    height: auto;
+    padding-left: 20%;
   }
   
   .Welcome h1 {
-    font-size: 36px;
-    color: #ffffff;
+    font-size: 40px;
+    color: #318e88;
     margin-bottom: 20px;
-    width: 30%;
+    width: 50%;
   }
 
   .Welcome p {
-    font-size: 20px;
-    color: #ffffff;
-    width: 30%;
+    font-size: 25px;
+    color: #318e88;
+    width: 50%;
 
   }
   
@@ -46,7 +97,7 @@ body {
     justify-content: left;
     align-items: left;
     margin-top: 20px;
-    width: 40%;
+    width: 50%;
   }
   
   .Welcome input[type="text"] {
@@ -99,7 +150,7 @@ body {
   
   .top-menu-navigation {
     background-color: #318e88;
-    padding: 10px 0;
+    padding: 22px 0;
   }
   
   .top-menu-navigation ul {
@@ -112,6 +163,11 @@ body {
   
   .top-menu-navigation li {
     margin-right: 20px;
+  }
+
+  .top-menu-navigation li + li::before {
+    content: " | ";
+    color: white;
   }
   
   .top-menu-navigation li:last-child {
@@ -274,3 +330,49 @@ main {
     padding: 50px;
     display: block;
   }
+
+  .footer li + li::before {
+    content: " | ";
+    color: white;
+  }
+  
+  .breakfast_dishes {
+    padding: 10%;
+  }
+
+  .view-recipe-button {
+    padding: 8px 15px;
+    background-color: #318e88;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.view-recipe-button :hover {
+    background-color: #217872;
+}
+
+.login-signup {
+    padding: 4%;
+    background-color: rgb(160, 65, 28);
+    color: white;
+}
+
+.login-signup h2 {
+    font: #318e88;
+    font-size: 25px;
+}
+
+.recipe-section-title {
+    font-size: 20px;
+    font: #318e88;
+    padding-left: 5%;
+    padding: 2%;
+    padding-bottom: 0;
+}
+
+.recipe-section-title h2 {
+    font: #318e88;
+}
