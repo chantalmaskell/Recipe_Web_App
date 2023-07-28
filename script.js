@@ -42,15 +42,13 @@ async function handleSaveButtonClick(recipeId, userId, isSaved) {
 }
 
 // Attach click event listeners to all "Save" and "Remove" buttons
-var buttons = document.querySelectorAll(".save-button, .remove-button, .save-rating, .unsave-rating");
+var buttons = document.querySelectorAll(".save-button, .remove-button");
 buttons.forEach(function (button) {
     button.addEventListener("click", function () {
         var recipeId = button.dataset.recipeId;
         var userId = button.dataset.userId;
         var isSaved = button.classList.contains("remove-button");
-        var isRated = button.classList.contains("unsave-rating");
         handleSaveButtonClick(recipeId, userId, isSaved);
-        handleSaveRating(recipeId, userId, isRated);
     });
 });
 
@@ -94,3 +92,13 @@ async function handleSaveRating(recipeId, userId, isRated) {
         alert("Please log in to save or remove this recipe.");
     }
 }
+
+var buttons = document.querySelectorAll(".save-rating, .unsave-rating");
+buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        var recipeId = button.dataset.recipeId;
+        var userId = button.dataset.userId;
+        var isRated = button.classList.contains("unsave-rating");
+        handleSaveRating(recipeId, userId, isRated);
+    });
+});

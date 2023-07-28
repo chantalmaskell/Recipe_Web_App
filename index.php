@@ -65,9 +65,9 @@ if (isset($_GET['rate_action']) && $_GET['rate_action'] === 'save_rating') {
     if (isset($_SESSION["user_id"])) {
         $userId = $_SESSION["user_id"];
         $recipeId = $_GET['recipe_id'];
-        $rate = $_POST['rating'];
+        // $rate = $_POST['rating'];
 
-        $query = "INSERT into ratings (recipe_id, rating, user) VALUES ('$recipeId', '$rate', '$userId')";
+        $query = "INSERT into ratings (recipe_id, rating, user) VALUES ('$recipeId', '1', '$userId')";
         // $run_query = mysqli_query($sql_var, $query);
 
         if ($sql_object->query($query) === TRUE) {
