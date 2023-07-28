@@ -62,6 +62,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./global.css">
+    <link rel="icon" type="image/x-icon" href="./images/icons8-brezel-50.png">
     <title>Welcome to Recipe Central | All the taste in one place</title>
 </head>
 
@@ -100,13 +101,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
     </div> 
 
     <?php include 'secondary-navigation.php'?>
-
-    <section class="breadcrumb" aria-label="Breadcrumb Menu">
-        <ul class="breadcrumb">
-            <li><a href="#">Home page</a></li>
-            <li>Current page</li>
-          </ul>
-    </section>
 
     <section class="recipe-section-title">
         <h2>Check out our <span style="color: #c04242">team favourites</span></h2>
@@ -181,6 +175,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
         var isLoggedIn = <?php echo isset($_SESSION["user_id"]) ? "true" : "false"; ?>;
     </script>
 
+        <button class="view-recipe-button">View more of our team favourites</button>
+    </section>
+  </div>
+</div>
+
+<?php include 'Recipe-card.php'?>
+
 <div class="row">
         <div class="column a"><iframe width="440" height="315" src="https://www.youtube.com/embed/5xrwwIKlto8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
         <div class="column left">
@@ -193,12 +194,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
         <h2>Cook in <span style="color: #c04242">30 minutes</span> or less</h2>
     </section>
     <?php include 'Quick_dishes.php'?>
-
-
-    <section class="recipe-section-title">
-    <h2>Explore <span style="color: #c04242">mouth-watering</span> desserts</h2>
-    </section>
-    <?php include 'Desserts.php'?>
 
     <!-- Include the external script.js file -->
     <script src="script.js"></script>

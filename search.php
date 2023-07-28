@@ -64,32 +64,17 @@ if (isset($_GET['search'])) {
 
     <?php include 'primary-navigation.php'?>
 
-<div class="Explore-recipes">
-    <section class="Recipe-highlight">
-            <h1>Our current favourite: Fluffy Vegan Pancakes</h1>
-    </section>
+<div class="card">
+  <img src="./images/Spaghetti-Bolognese.jpg" alt="Image of Spaghetti Bolognese" style="width:100%">
+  <div class="container">
+    <h1>Our current favourite: <b>Garlic and Parmesan Spaghetti Bolognese</b></h1>
+    <p>Get all five of your five-a-day with this spaghetti Bolognese. The hidden veg in the sauce makes it ideal for kids and you can freeze any leftovers</p>
+  </div>
 </div>
-</div>
 
-    <!--Checks if session data is stored-->
-    <?php if (isset($_SESSION["user_id"])) : ?>
+<?php include 'secondary-navigation.php'?>
 
-        <p>You are now logged in</p>
-        <!--Allows the user to log out-->
-        <p><a href="logout.php">Log out</a></p>
-        <!--Gives the user links to log in or sign up-->
-    <?php else : ?>
-        <p>Please <a href="login_page.php">Log In</a> or <a href="signup_form.html">Sign Up</a></p>
-    <?php endif; ?>
 
-    <?php include 'secondary-navigation.php'?>
-
-    <section class="breadcrumb" aria-label="Breadcrumb Menu">
-        <ul class="breadcrumb">
-            <li><a href="#">Home page</a></li>
-            <li>Current page</li>
-          </ul>
-    </section>
 
     <!-- Display the search results -->
     <div class="search-results">
@@ -145,6 +130,8 @@ if (isset($_GET['search'])) {
             <p>No recipes found. Please try a different search query.</p>
         <?php endif; ?>
     </div>
+
+    <?php include 'Footer.php'?>
 
     <!-- Assign the login status to a JavaScript variable -->
     <script>
