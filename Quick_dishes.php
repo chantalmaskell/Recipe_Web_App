@@ -1,10 +1,10 @@
-<section class="pasta-dishes">
+<section>
     <?php
     $sql = "SELECT * 
     FROM `recipes`
     INNER JOIN recipe_categories
     ON recipes.recipe_id = recipe_categories.recipe_id
-    WHERE Category = 'Breakfast'
+    WHERE Prep_time = '30 minutes'
     LIMIT 3;";
 
     $result = $sql_object->query($sql);

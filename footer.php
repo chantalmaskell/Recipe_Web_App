@@ -3,14 +3,13 @@
 </head>
 
 <footer>
-      <div class="footer-content">
-        <ul class="footer-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Browse Recipes</a></li>
-          <li><a href="#">Login</a></li>
-          <li><a href="#">Sign Up</a></li>
-          <li><a href="#">Saved Recipes</a></li>
-        </ul>
-        <p>&copy;Recipe Central</p>
-      </div>
+        <section class="footer" aria-label="Footer">
+            <div class="row">
+                <ul>
+                    <li><a href="">Back to top</a></li>
+                    <li><a href="">Explore range of recipes</a></li>
+                    <li><a href="">View your saved recipes</a></li>
+                  </ul>
+            </div>
+        </section>
     </footer>

@@ -82,25 +82,35 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
                     </form>
                 </section>
             </section>
-        </div>
-        <div class="column right">
+            <section class="Login-signup">
+                <!--Checks if session data is stored-->
+                <?php if (isset($_SESSION["user_id"])) : ?>
+
+                    <p>You are now logged in</p>
+                    <!--Allows the user to log out-->
+                    <p><a href="logout.php">Log out</a></p>
+                    <!--Gives the user links to log in or sign up-->
+                        <?php else : ?>
+                        <p>Please <a href="login_page.php">Log In</a> or <a href="signup_form.html">Sign Up</a> to rate recipes and view your saved recipes.</p>
+                        <?php endif; ?>
+                </div>
+                        </section>
+            <div class="column right">
         </div>
     </div> 
 
     <?php include 'secondary-navigation.php'?>
 
-<section class="login-signup">
-    <!--Checks if session data is stored-->
-    <?php if (isset($_SESSION["user_id"])) : ?>
+    <section class="breadcrumb" aria-label="Breadcrumb Menu">
+        <ul class="breadcrumb">
+            <li><a href="#">Home page</a></li>
+            <li>Current page</li>
+          </ul>
+    </section>
 
-        <p>You are now logged in</p>
-        <!--Allows the user to log out-->
-        <p><a href="logout.php">Log out</a></p>
-        <!--Gives the user links to log in or sign up-->
-            <?php else : ?>
-            <p>Please <a href="login_page.php">Log In</a> or <a href="signup_form.html">Sign Up</a> to rate recipes and view your saved recipes.</p>
-            <?php endif; ?>
-            </section>
+    <section class="recipe-section-title">
+        <h2>Check out our <span style="color: #c04242">team favourites</span></h2>
+    </section>
     <div>
         <?php
         // Include the database connection file (MySQLi version)
@@ -172,7 +182,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
     </script>
 
 <div class="row">
-        <div class="column a"><iframe width="560" height="315" src="https://www.youtube.com/embed/5xrwwIKlto8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="column a"><iframe width="440" height="315" src="https://www.youtube.com/embed/5xrwwIKlto8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
         <div class="column left">
             <h2>A Family Favourite: Delicious Toad-in-the-Hole</h2>
             <p>Serve this comforting classic made with chipolata sausages and a simple batter – it’s easy enough that kids can help make it.</p>
@@ -180,29 +190,20 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
     </div>
 
     <section class="recipe-section-title">
-    <h2>Explore Breakfast Dishes</h2>
+        <h2>Cook in <span style="color: #c04242">30 minutes</span> or less</h2>
     </section>
-    <?php include 'breakfast_dishes.php'?>
+    <?php include 'Quick_dishes.php'?>
 
 
     <section class="recipe-section-title">
-    <h2>Explore Desserts</h2>
+    <h2>Explore <span style="color: #c04242">mouth-watering</span> desserts</h2>
     </section>
     <?php include 'Desserts.php'?>
 
     <!-- Include the external script.js file -->
     <script src="script.js"></script>
 
-    <footer>
-        <div class="footer-content">
-            <ul class="footer-links">
-                <li><a href="#">Scroll to top</a></li>
-                <li><a href="#">Browse Recipes</a></li>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Sign Up</a></li>
-                <li><a href="#">Saved Recipes</a></li>
-            </ul>
-        </div>
-    </footer>
+    <?php include 'Footer.php'?>
+
 </body>
 </html>

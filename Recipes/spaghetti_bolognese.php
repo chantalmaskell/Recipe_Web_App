@@ -4,8 +4,8 @@
     FROM `recipes`
     INNER JOIN recipe_categories
     ON recipes.recipe_id = recipe_categories.recipe_id
-    WHERE Category = 'Dessert'
-    LIMIT 3;";
+    WHERE recipe_id = '1'
+    LIMIT 1;";
     $result = $sql_object->query($sql);
 
     // Check if there are any recipes in the result
@@ -46,6 +46,6 @@
         echo "</div>"; // Close row div
     }
     ?>
-</section>
 
 <button class="view-recipe-button">View more healthy dishes</button>
+</section>

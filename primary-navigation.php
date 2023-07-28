@@ -2,12 +2,12 @@
     <ul>
         <li><section class="search-bar">
                     <form action="search.php" method="GET">
-                        <input type="text" name="search" placeholder="Search for recipes">
+                        <input type="text" name="search" placeholder="Spaghetti Bolognese...">
                         <button type="submit">Search</button>
                     </form>
                 </section>
         <li><a href="index.php">Home</a></li>
-        <li><a href="####">Browse Recipes</a></li>
+        <li><a href="search.php?search=">Browse Recipes</a></li>
         <?php if (isset($_SESSION["user_id"])) : ?>
                 <li><a href="logout.php">Log out</a></li>
             <?php else : ?>

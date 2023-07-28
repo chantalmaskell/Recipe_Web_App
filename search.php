@@ -56,14 +56,20 @@ if (isset($_GET['search'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
+    <link rel="stylesheet" href="./global.css">
+    <title>Recipe Central | Explore our range of mouth-watering recipes</title>
 </head>
 
 <body>
-    <form action="search.php" method="GET">
-        <input type="text" name="search" placeholder="Search for recipes">
-        <button type="submit">Search</button>
-    </form>
+
+    <?php include 'primary-navigation.php'?>
+
+<div class="Explore-recipes">
+    <section class="Recipe-highlight">
+            <h1>Our current favourite: Fluffy Vegan Pancakes</h1>
+    </section>
+</div>
+</div>
 
     <!--Checks if session data is stored-->
     <?php if (isset($_SESSION["user_id"])) : ?>
@@ -76,19 +82,36 @@ if (isset($_GET['search'])) {
         <p>Please <a href="login_page.php">Log In</a> or <a href="signup_form.html">Sign Up</a></p>
     <?php endif; ?>
 
+    <?php include 'secondary-navigation.php'?>
+
+    <section class="breadcrumb" aria-label="Breadcrumb Menu">
+        <ul class="breadcrumb">
+            <li><a href="#">Home page</a></li>
+            <li>Current page</li>
+          </ul>
+    </section>
+
     <!-- Display the search results -->
     <div class="search-results">
         <?php if (isset($recipes) && !empty($recipes)) : ?>
             <?php foreach ($recipes as $recipe) : ?>
-                <div class="recipe-card">
+                <div class="recipe-full-page">
                     <h3><?php echo $recipe['Name']; ?></h3>
+                    <img class="recipe-image" src="./images/Healthy-pizza.jpg" alt="Recipe Image">
                     <p><?php echo $recipe['Description']; ?></p>
                     <?php if (isset($recipe['Ingredients'])) : ?>
-                        <p>Ingredients: <?php echo $recipe['Ingredients']; ?></p>
-                    <?php else : ?>
+                        <p>Ingredients:</p>
+                        <ul>
+                        <?php
+                        $ingredients = explode(', ', $recipe['Ingredients']);
+                        foreach ($ingredients as $ingredient) {
+                        echo "<li>$ingredient</li>";
+                        }
+                        ?>
+                        </ul>
+                        <?php else : ?>
                         <p>No ingredients available for this recipe.</p>
-                    <?php endif; ?>
-
+                        <?php endif; ?>
                     <!-- Display the "Save" or "Remove" button with the recipe ID as a data attribute -->
                     <?php
                     // Check if the user is logged in
@@ -130,5 +153,4 @@ if (isset($_GET['search'])) {
     <!-- Include the external script.js file -->
     <script src="script.js"></script>
 </body>
-
 </html>
