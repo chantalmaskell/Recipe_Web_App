@@ -29,4 +29,20 @@ function isRecipeSaved($userId, $recipeId) {
     }
 }
 
+// Function to check if a recipe rating is saved for a user
+function isRatingSaved($userId, $recipeId) {
+    global $sql_object;
+
+    // Prepare and execute a query to check if the recipe is saved for the user
+    $sql = "SELECT * FROM ratings WHERE user = '$userId' AND recipe_id = '$recipeId'";
+    $result = $sql_object->query($sql);
+
+    // If the query returns any rows, it means the rating is saved for the user
+    if ($result->num_rows > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 return $sql_object;
