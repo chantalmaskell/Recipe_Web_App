@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2023 at 09:22 PM
+-- Generation Time: Jul 28, 2023 at 06:18 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -219,6 +219,14 @@ CREATE TABLE `saved_recipes` (
   `saved_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `saved_recipes`
+--
+
+INSERT INTO `saved_recipes` (`id`, `user_id`, `recipe_id`, `saved_at`) VALUES
+(64, 1, 2, '2023-07-28 15:00:34'),
+(67, 1, 3, '2023-07-28 16:14:17');
+
 -- --------------------------------------------------------
 
 --
@@ -254,7 +262,6 @@ INSERT INTO `user` (`id`, `name`, `email`, `hash_password`) VALUES
 -- Indexes for table `ratings`
 --
 ALTER TABLE `ratings`
-  ADD PRIMARY KEY (`recipe_id`),
   ADD UNIQUE KEY `recipe_id` (`recipe_id`,`user`),
   ADD UNIQUE KEY `recipe_id_2` (`recipe_id`,`user`),
   ADD KEY `user_id` (`user`);
@@ -312,7 +319,7 @@ ALTER TABLE `recipes`
 -- AUTO_INCREMENT for table `saved_recipes`
 --
 ALTER TABLE `saved_recipes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -323,12 +330,6 @@ ALTER TABLE `user`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `ratings`
---
-ALTER TABLE `ratings`
-  ADD CONSTRAINT `user_id` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `recipe_categories`
@@ -347,13 +348,6 @@ ALTER TABLE `recipe_ingredients`
 --
 ALTER TABLE `recipe_steps`
   ADD CONSTRAINT `recipe_id` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`);
-
---
--- Constraints for table `saved_recipes`
---
-ALTER TABLE `saved_recipes`
-  ADD CONSTRAINT `id_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`),
-  ADD CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
