@@ -160,7 +160,7 @@ if (isset($_GET['rate_action']) && $_GET['rate_action'] === 'save_rating') {
                     echo "<label for=rating class='star'>4</label>";
                     echo "<input type='radio' name='rating' id='rating' value='5'>";
                     echo "<label for=rating class='star'>5</label>";
-                    echo "</div";
+                    echo "</div>";
                     echo "<div>";
 
                     $isRated = isRatingSaved($_SESSION["user_id"], $recipe['recipe_id']);
