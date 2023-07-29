@@ -36,7 +36,7 @@ if (isset($_GET['search'])) {
     $searchQuery = $_GET['search'];
 
     // Prepare the SQL statement to search for recipes matching the query
-    $sql = "SELECT r.recipe_id, r.Name, r.Description, GROUP_CONCAT(ri.Ingredient SEPARATOR ', ') AS Ingredients
+    $sql = "SELECT r.recipe_id, r.Name, r.Description, r.Prep_time, r.Cook_time, GROUP_CONCAT(ri.Ingredient SEPARATOR ', ') AS Ingredients
         FROM recipes r
         LEFT JOIN recipe_ingredients ri ON r.recipe_id = ri.recipe_id
         WHERE r.Name LIKE :searchQuery OR ri.Ingredient LIKE :searchQuery
@@ -83,19 +83,9 @@ if (isset($_GET['search'])) {
                     <?php echo "<a href='Recipe_details.php?recipe_id=" . $recipe['recipe_id'] . "'>";?>
                     <img class="recipe-image" src="./images/Healthy-pizza.jpg" alt="Recipe Image">
                     <p><?php echo $recipe['Description']; ?></p>
-                    <?php if (isset($recipe['Ingredients'])) : ?>
-                        <p>Ingredients:</p>
-                        <ul>
-                        <?php
-                        $ingredients = explode(', ', $recipe['Ingredients']);
-                        foreach ($ingredients as $ingredient) {
-                        echo "<li>$ingredient</li>";
-                        }
-                        ?>
-                        </ul>
-                        <?php else : ?>
-                        <p>No ingredients available for this recipe.</p>
-                        <?php endif; ?>
+                    <p><?php echo "<p><b>Preparation time:</b> " . $recipe['Prep_time'] . "</p>";?></p>
+                    <p><?php echo "<p><b>Cooking time:</b> " . $recipe['Cook_time'] . "</p>";?></p>
+
                     <!-- Display the "Save" or "Remove" button with the recipe ID as a data attribute -->
                     <?php
                     // Check if the user is logged in
