@@ -74,14 +74,13 @@ if (isset($_GET['search'])) {
 
 <?php include 'secondary-navigation.php'?>
 
-
-
     <!-- Display the search results -->
     <div class="search-results">
         <?php if (isset($recipes) && !empty($recipes)) : ?>
             <?php foreach ($recipes as $recipe) : ?>
                 <div class="recipe-full-page">
                     <h3><?php echo $recipe['Name']; ?></h3>
+                    <?php echo "<a href='Recipe_details.php?recipe_id=" . $recipe['recipe_id'] . "'>";?>
                     <img class="recipe-image" src="./images/Healthy-pizza.jpg" alt="Recipe Image">
                     <p><?php echo $recipe['Description']; ?></p>
                     <?php if (isset($recipe['Ingredients'])) : ?>

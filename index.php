@@ -105,80 +105,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
     <section class="recipe-section-title">
         <h2>Check out our <span style="color: #c04242">team favourites</span></h2>
     </section>
-    <div>
-        <?php
-        // Include the database connection file (MySQLi version)
-        require_once 'database_connect.php';
-
-        // Retrieve recipes from the database
-        $sql = "SELECT * FROM recipes LIMIT 3";
-        $result = $sql_object->query($sql);
-
-        // Check if there are any recipes in the result
-        if ($result->num_rows > 0) {
-            // Initialize a counter to keep track of the number of displayed recipes
-            $counter = 0;
-
-            // Start the first row
-            echo "<div class='row'>";
-
-            // Fetch and display the recipes
-            while ($recipe = $result->fetch_assoc()) {
-                // Display the recipe information as needed recipe details (description, ingredients, etc.)
-                echo "<div class='column recipe'>";
-                echo "<div class='recipe-card'>";
-                echo "<h3>" . $recipe['Name'] . "</h3>";
-                echo "<p>" . $recipe['Description'] . "</p>";
-                echo "<p>Preparation time: " . $recipe['Prep_time'] . "</p>";
-                echo "<p>Cooking time: " . $recipe['Cook_time'] . "</p>";
-
-                // Check if the user is logged in and show the "Save" or "Remove" button accordingly
-                if (isUserLoggedIn()) {
-                    // Check if the recipe is saved or not and display the appropriate button
-                    $isSaved = isRecipeSaved($_SESSION["user_id"], $recipe['recipe_id']);
-                    if ($isSaved) {
-                        echo "<button class='remove-button' data-recipe-id='" . $recipe['recipe_id'] . "'>Remove</button>";
-                    } else {
-                        echo "<button class='save-button' data-recipe-id='" . $recipe['recipe_id'] . "'>Save</button>";
-                    }
-                } else {
-                    echo "<p>Please <a href='login_page.php'>log in</a> to save this recipe.</p>";
-                }
-
-                echo "</div>";
-                echo "</div>";
-
-                // Increment the counter
-                $counter++;
-
-                // Check if the current row is complete (3 columns) and start a new row if need be
-                if ($counter % 3 === 0) {
-                    echo "</div>"; // Close the current row
-                    echo "<div class='row'>"; // Start a new row
-                }
-            }
-
-            // Close the last row if it is not already closed
-            if ($counter % 3 !== 0) {
-                echo "</div>";
-            }
-        } else {
-            echo "No recipes found.";
-        }
-        // Close the database connection
-        // $sql_object->close();
-        ?>
-    </div>
-
-    <!-- Assign the login status to a JavaScript variable -->
-    <script>
-        var isLoggedIn = <?php echo isset($_SESSION["user_id"]) ? "true" : "false"; ?>;
-    </script>
-
-        <button class="view-recipe-button">View more of our team favourites</button>
-    </section>
-  </div>
-</div>
 
 <?php include 'Recipe-card.php'?>
 
@@ -193,7 +119,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
     <section class="recipe-section-title">
         <h2>Cook in <span style="color: #c04242">30 minutes</span> or less</h2>
     </section>
-    <?php include 'Quick_dishes.php'?>
+    
+    <?php include 'Recipe-card.php'?>
 
     <!-- Include the external script.js file -->
     <script src="script.js"></script>
