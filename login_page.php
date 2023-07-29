@@ -53,6 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
+    
     <section class="Login">
         <h1>Login</h1>
         <!--Checks the $valid_login variable to see if the login details are correct-->

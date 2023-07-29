@@ -74,6 +74,8 @@ if (isset($_GET['search'])) {
 
 <?php include 'secondary-navigation.php'?>
 
+<?php include './Components/Back_button.html'?>
+
     <!-- Display the search results -->
     <section class="search-results">
         <?php if (isset($recipes) && !empty($recipes)) : ?>
