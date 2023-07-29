@@ -116,6 +116,44 @@ if (isset($_GET['rate_action']) && $_GET['rate_action'] === 'save_rating') {
         <p>Please <a href="login_page.php">Log In</a> or <a href="signup_form.html">Sign Up</a></p>
     <?php endif; ?>
 
+<!--Start of the browse by category functionality-->
+
+    <p>Browse by category</p>
+    <form action="category_search.php" method="GET">
+        <select name="category">
+            <!--<option value="">Please select</option>-->
+            <?php
+                $categories_sql = "SELECT DISTINCT Category FROM recipe_categories";
+                $categories_result = $sql_object->query($categories_sql);
+
+                if ($categories_result->num_rows > 0) {
+                    while($row = $categories_result->fetch_assoc()) {
+                        echo '<option value="' . $row["Category"] . '">' . $row["Category"] . '</option>';
+                    }
+                } else {
+                    echo "0 results";
+                }
+            ?>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+
+<!--End of the browse by category functionality-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div>
         <?php
         // Include the database connection file (MySQLi version)
