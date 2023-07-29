@@ -140,20 +140,6 @@ if (isset($_GET['rate_action']) && $_GET['rate_action'] === 'save_rating') {
 
 <!--End of the browse by category functionality-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div>
         <?php
         // Include the database connection file (MySQLi version)
