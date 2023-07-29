@@ -59,16 +59,17 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
     }
 }
 
-if (isset($_GET['rate_action']) && $_GET['rate_action'] === 'save_rating') {
+// Handle the request to add a rating to the database
+if (isset($_GET['action']) && $_GET['action'] === 'save_rating') {
     echo "hello world";
     // Check if the user is logged in
     if (isset($_SESSION["user_id"])) {
         $userId = $_SESSION["user_id"];
-        $recipeId = $_GET['recipe_id'];
-        // $rate = $_POST['rating'];
+        $recipe_Id = $_GET['recipe_id'];
+        $rate = $_GET['rating'];
 
-        $query = "INSERT into ratings (recipe_id, rating, user) VALUES ('$recipeId', '1', '$userId')";
-        // $run_query = mysqli_query($sql_var, $query);
+        //query to insert rating to MySQL database
+        $query = "INSERT into ratings (recipe_id, rating, user) VALUES ('$recipe_Id', '$rate', '$userId')";
 
         if ($sql_object->query($query) === TRUE) {
             echo "Rating added successfully!";
@@ -80,8 +81,8 @@ if (isset($_GET['rate_action']) && $_GET['rate_action'] === 'save_rating') {
         echo "Please log in to add this rating.";
         exit; // Exit to prevent displaying the entire HTML page again
     }
-    
 }
+
 
 ?>
 
@@ -116,30 +117,6 @@ if (isset($_GET['rate_action']) && $_GET['rate_action'] === 'save_rating') {
         <p>Please <a href="login_page.php">Log In</a> or <a href="signup_form.html">Sign Up</a></p>
     <?php endif; ?>
 
-<!--Start of the browse by category functionality-->
-
-    <p>Browse by category</p>
-    <form action="category_search.php" method="GET">
-        <select name="category">
-            <!--<option value="">Please select</option>-->
-            <?php
-                $categories_sql = "SELECT DISTINCT Category FROM recipe_categories";
-                $categories_result = $sql_object->query($categories_sql);
-
-                if ($categories_result->num_rows > 0) {
-                    while($row = $categories_result->fetch_assoc()) {
-                        echo '<option value="' . $row["Category"] . '">' . $row["Category"] . '</option>';
-                    }
-                } else {
-                    echo "0 results";
-                }
-            ?>
-        </select>
-        <button type="submit">Search</button>
-    </form>
-
-<!--End of the browse by category functionality-->
-
     <div>
         <?php
         // Include the database connection file (MySQLi version)
@@ -152,11 +129,32 @@ if (isset($_GET['rate_action']) && $_GET['rate_action'] === 'save_rating') {
         if ($result->num_rows > 0) {
             // Fetch and display the recipes
             while ($recipe = $result->fetch_assoc()) {
+                $rec = $recipe['recipe_id'];
+
+                //fetch any ratings the recipes may have
+                $rate_sql = "SELECT * FROM ratings WHERE recipe_id = '$rec'";
+                $rate = $sql_object->query($rate_sql);
+                $rate_result = $rate->fetch_assoc();
+                
+                if ($rate->num_rows > 0) {
+                    if ($rate->num_rows > 1) {
+                        //get the average of the ratings
+                        $av_sql = "SELECT ROUND(AVG(rating), 1) AS rate_av FROM ratings";
+                        $av_sql_result = $sql_object->query($av_sql);
+                        $av = $av_sql_result->fetch_assoc();
+                        $av_rating = $av['rate_av'] . '/5';
+                    } else {
+                        $av_rating = $rate_result['rating'] . '/5';
+                    }
+                } else {
+                    $av_rating = "No ratings yet";
+                }
+
                 // Display the recipe information as needed recipe details (description, ingredients, etc.)
                 echo "<form method=POST>";
                 echo "<div class='recipe-card'>";
                 echo "<h3>" . $recipe['Name'] . "</h3>";
-                echo "<h4>" . "Rating: " . $recipe['Rating'] . "/5" . "</h4>";
+                echo "<h4>" . $av_rating . "</h4>";
                 echo "<p>" . $recipe['Description'] . "</p>";
                 echo "<p>" . $recipe['Prep_time'] . "</p>";
                 echo "<p>" . $recipe['Cook_time'] . "</p>";
@@ -171,7 +169,7 @@ if (isset($_GET['rate_action']) && $_GET['rate_action'] === 'save_rating') {
                         echo "<button class='save-button' data-recipe-id='" . $recipe['recipe_id'] . "'>Save</button>";
                     }
 
-                    //Rating system below
+                    //Radio buttons for rating system
                     echo "<div class='rating'>";
                     echo "<div class='star-icon'>";
                     echo "<input type='radio' name='rating' id='rating' value='1'>";
@@ -184,16 +182,15 @@ if (isset($_GET['rate_action']) && $_GET['rate_action'] === 'save_rating') {
                     echo "<label for=rating class='star'>4</label>";
                     echo "<input type='radio' name='rating' id='rating' value='5'>";
                     echo "<label for=rating class='star'>5</label>";
-                    echo "</div>";
-                    echo "<div>";
 
+                    //check if the recipe has been rated by the user
                     $isRated = isRatingSaved($_SESSION["user_id"], $recipe['recipe_id']);
 
-
+                    //if rated a message will appear. Otherwise a button will appear to rate
                     if ($isRated) {
-                        echo "<button class='unsave-rating' rating-id='" . $recipe['recipe_id'] . "'>Unsave</button>";
+                        echo "<p>You have submitted a rating for this recipe</p>";
                     } else {
-                        echo "<button class='save-rating' rating-id='" . $recipe['recipe_id'] . "'>Rate</button>";
+                        echo "<button class='save-rating' id=recipe value='" . $recipe['recipe_id'] . "' data-rating-id='" . $recipe['recipe_id'] . "'>Rate</button>";
                     }
 
                     echo "</div>";
