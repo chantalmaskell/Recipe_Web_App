@@ -24,11 +24,12 @@
         }
         ?>
     </title>
+    
 </head>
 <body>
-    <?php include 'primary-navigation.php'?>
+<div class="recipe-container">
 
-    <?php include 'secondary-navigation.php'?>
+    <?php include 'primary-navigation.php'?>
 
     <section class="recipe-details">
         <?php
@@ -44,11 +45,13 @@
             $recipe_id = $_GET['recipe_id'];
 
             // Query the database to fetch the recipe information for the provided recipe ID
-            $sql = "SELECT r.recipe_id, r.Name, r.Description, r.Rating, GROUP_CONCAT(ri.Ingredient SEPARATOR ', ') AS Ingredients
+            $sql = "SELECT r.recipe_id, r.Name, r.Description AS RecipeDescription, r.Rating, r.Prep_time, r.Cook_time, GROUP_CONCAT(ri.Ingredient SEPARATOR ', ') AS Ingredients, rs.Step_number, rs.Description AS StepDescription
             FROM recipes r
             LEFT JOIN recipe_ingredients ri ON r.recipe_id = ri.recipe_id
+            LEFT JOIN recipe_steps rs ON r.recipe_id = rs.recipe_id
             WHERE r.recipe_id = $recipe_id
-            GROUP BY r.recipe_id";
+            GROUP BY r.recipe_id, rs.Step_number
+            ORDER BY rs.Step_number";
 
             $result = $sql_object->query($sql);
 
@@ -56,9 +59,10 @@
                 $recipe = $result->fetch_assoc();
                 ?>
                 <img class="recipe-image" src="./images/Spaghetti-Bolognese.jpg" alt="Recipe Image">
-                <h1><?php echo $row['Name']; ?></h1>
-                <h3>Rating: <?php echo $recipe['Rating']; ?></h3>
-                <p><?php echo $recipe['Description']; ?></p>
+                <h1><?php echo $recipe['Name']; ?></h1>
+                <h2>Rating: <?php echo $recipe['Rating']; ?></h2>
+                <p><b>Preparation time:</b> <?php echo $recipe['Prep_time']; ?></p>
+                <p><b>Cooking time:</b> <?php echo $recipe['Cook_time']; ?></p>
 
                 <?php
                 // Check if the recipe has any ingredients and display them
@@ -79,21 +83,21 @@
                     echo "<p>No ingredients available for this recipe.</p>";
                 } ?>
 
-                <?php
-                // Check if the recipe has any steps and display them
-                if (isset($recipe['Step_number']) && isset($recipe['Description'])) {
-                    ?>
-                    <section class="steps-section">
-                        <h3>Steps:</h3>
-                        <ol>
-                            <?php do {
-                                echo "<li>" . $recipe['Description'] . "</li>";
-                            } while ($recipe = $result->fetch_assoc()); ?>
-                        </ol>
-                    </section>
-                <?php } else {
-                    echo "<p>No steps available for this recipe.</p>";
-                } ?>
+<section class="steps-section">
+<?php
+// Check if the recipe has any steps and display them
+if (isset($recipe['Step_number']) && isset($recipe['StepDescription'])) {
+    ?>
+    <h3>Steps:</h3>
+    <ol>
+        <?php foreach ($result as $step) {
+            echo "<li>" . $step['StepDescription'] . "</li>";
+        } ?>
+    </ol>
+<?php } else {
+    echo "<p>No steps available for this recipe.</p>";
+} ?>
+</section>
 
                 <?php
                 // Check if the user is logged in and show the "Save" or "Remove" button accordingly
@@ -119,7 +123,7 @@
         }
         ?>
     </section>
-
+</div>
     <?php include 'Footer.php'?>
 
 </body>

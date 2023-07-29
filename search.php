@@ -57,7 +57,7 @@ if (isset($_GET['search'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./global.css">
-    <title>Recipe Central | Explore our range of mouth-watering recipes</title>
+    <title>Recipe Central | Explore our range of tasty recipes</title>
 </head>
 
 <body>
@@ -68,19 +68,18 @@ if (isset($_GET['search'])) {
   <img src="./images/Spaghetti-Bolognese.jpg" alt="Image of Spaghetti Bolognese" style="width:100%">
   <div class="container">
     <h1>Our current favourite: <b>Garlic and Parmesan Spaghetti Bolognese</b></h1>
-    <p>Get all five of your five-a-day with this spaghetti Bolognese. The hidden veg in the sauce makes it ideal for kids and you can freeze any leftovers</p>
+    <p>Get all five of your five-a-day with this Spaghetti Bolognese. The hidden veg in the sauce makes it ideal for kids and you can freeze any leftovers</p>
   </div>
 </div>
 
 <?php include 'secondary-navigation.php'?>
 
     <!-- Display the search results -->
-    <div class="search-results">
+    <section class="search-results">
         <?php if (isset($recipes) && !empty($recipes)) : ?>
             <?php foreach ($recipes as $recipe) : ?>
                 <div class="recipe-full-page">
                     <h3><?php echo $recipe['Name']; ?></h3>
-                    <?php echo "<a href='Recipe_details.php?recipe_id=" . $recipe['recipe_id'] . "'>";?>
                     <img class="recipe-image" src="./images/Healthy-pizza.jpg" alt="Recipe Image">
                     <p><?php echo $recipe['Description']; ?></p>
                     <p><?php echo "<p><b>Preparation time:</b> " . $recipe['Prep_time'] . "</p>";?></p>
@@ -112,13 +111,18 @@ if (isset($_GET['search'])) {
                         echo "<p>Please <a href='login_page.php'>log in</a> to save or remove this recipe.</p>";
                     }
                     ?>
-
+                <?php
+                $recipeLink = "Recipe_details.php?recipe_id=" . $recipe['recipe_id'];
+                echo "<a href='" . $recipeLink . "'>";
+                ?>
+                <button class="details-button">View recipe for <?php echo $recipe['Name']; ?></button>
+                </a>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
             <p>No recipes found. Please try a different search query.</p>
         <?php endif; ?>
-    </div>
+        </section>
 
     <?php include 'Footer.php'?>
 
