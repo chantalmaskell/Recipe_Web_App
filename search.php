@@ -36,7 +36,7 @@ if (isset($_GET['search'])) {
     $searchQuery = $_GET['search'];
 
     // Prepare the SQL statement to search for recipes matching the query
-    $sql = "SELECT r.recipe_id, r.Name, r.Description, r.Prep_time, r.Cook_time, GROUP_CONCAT(ri.Ingredient SEPARATOR ', ') AS Ingredients
+    $sql = "SELECT r.recipe_id, r.Name, r.Description, r.Prep_time, r.Cook_time, r.image_link, r.alt_text, GROUP_CONCAT(ri.Ingredient SEPARATOR ', ') AS Ingredients
         FROM recipes r
         LEFT JOIN recipe_ingredients ri ON r.recipe_id = ri.recipe_id
         WHERE r.Name LIKE :searchQuery OR ri.Ingredient LIKE :searchQuery
@@ -82,7 +82,7 @@ if (isset($_GET['search'])) {
             <?php foreach ($recipes as $recipe) : ?>
                 <div class="recipe-full-page">
                     <h3><?php echo $recipe['Name']; ?></h3>
-                    <img class="recipe-image" src="./images/Healthy-pizza.jpg" alt="Recipe Image">
+                    <img class="recipe-image" src="<?php echo $recipe['image_link'] ?>" alt="<?php echo $recipe['alt_text'] ?>">
                     <p><?php echo $recipe['Description']; ?></p>
                     <p><?php echo "<p><b>Preparation time:</b> " . $recipe['Prep_time'] . "</p>";?></p>
                     <p><?php echo "<p><b>Cooking time:</b> " . $recipe['Cook_time'] . "</p>";?></p>

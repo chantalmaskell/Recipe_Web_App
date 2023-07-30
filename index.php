@@ -1,8 +1,10 @@
 <?php
 
 //Creates or resumes a session via cookies
-session_start();
-
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 // Include the database connection file (MySQLi version)
 require_once 'database_connect.php';
 
@@ -50,6 +52,29 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
         exit; // Exit to prevent displaying the entire HTML page again
     } else {
         echo "Please log in to remove this recipe.";
+        exit; // Exit to prevent displaying the entire HTML page again
+    }
+}
+
+// Handle the request to add a rating to the database
+if (isset($_GET['action']) && $_GET['action'] === 'save_rating') {
+    // Check if the user is logged in
+    if (isset($_SESSION["user_id"])) {
+        $userId = $_SESSION["user_id"];
+        $recipe_Id = $_GET['recipe_id'];
+        $rate = $_GET['rating'];
+
+        //query to insert rating to MySQL database
+        $query = "INSERT into ratings (recipe_id, rating, user) VALUES ('$recipe_Id', '$rate', '$userId')";
+
+        if ($sql_object->query($query) === TRUE) {
+            echo "Rating added successfully!";
+        } else {
+            echo "Error adding rating: " . $sql_object->error;
+        }
+        exit; // Exit to prevent displaying the entire HTML page again
+    } else {
+        echo "Please log in to add this rating.";
         exit; // Exit to prevent displaying the entire HTML page again
     }
 }
@@ -113,6 +138,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
     </section>
     
     <?php include 'Quick_dishes.php'?>
+
+    <!-- Assign the login status to a JavaScript variable -->
+    <script>
+        var isLoggedIn = <?php echo isset($_SESSION["user_id"]) ? "true" : "false"; ?>;
+    </script>
 
     <!-- Include the external script.js file -->
     <script src="script.js"></script>

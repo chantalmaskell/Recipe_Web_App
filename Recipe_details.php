@@ -1,3 +1,46 @@
+<?php
+
+//Creates or resumes a session via cookies
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+
+$sql_var = require __DIR__ . "/database_connect.php";
+
+
+// Function to check if the user is logged in
+function isUserLoggedIn()
+{
+    return isset($_SESSION["user_id"]);
+}
+
+// Handle the request to add a rating to the database
+if (isset($_GET['action']) && $_GET['action'] === 'save_rating') {
+    // Check if the user is logged in
+    if (isset($_SESSION["user_id"])) {
+        $userId = $_SESSION["user_id"];
+        $recipe_Id = $_GET['recipe_id'];
+        $rate = $_GET['rating'];
+
+        //query to insert rating to MySQL database
+        $query = "INSERT into ratings (recipe_id, rating, user) VALUES ('$recipe_Id', '$rate', '$userId')";
+
+        if ($sql_object->query($query) === TRUE) {
+            echo "Rating added successfully!";
+        } else {
+            echo "Error adding rating: " . $sql_object->error;
+        }
+        exit; // Exit to prevent displaying the entire HTML page again
+    } else {
+        echo "Please log in to add this rating.";
+        exit; // Exit to prevent displaying the entire HTML page again
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,10 +76,6 @@
 
     <section class="recipe-details">
         <?php
-        function isUserLoggedIn()
-        {
-            return isset($_SESSION["user_id"]);
-        }
 
         require_once 'database_connect.php';
 
@@ -44,8 +83,28 @@
         if (isset($_GET['recipe_id'])) {
             $recipe_id = $_GET['recipe_id'];
 
+            //fetch any ratings the recipes may have
+            $rate_sql = "SELECT * FROM ratings WHERE recipe_id = '$recipe_id'";
+            $rate = $sql_object->query($rate_sql);
+            $rate_result = $rate->fetch_assoc();
+            
+            if ($rate->num_rows > 0) {
+                if ($rate->num_rows > 1) {
+                    //get the average of the ratings
+                    $av_sql = "SELECT ROUND(AVG(rating), 1) AS rate_av FROM ratings";
+                    $av_sql_result = $sql_object->query($av_sql);
+                    $av = $av_sql_result->fetch_assoc();
+                    $av_rating = $av['rate_av'] . '/5';
+                } else {
+                    $av_rating = $rate_result['rating'] . '/5';
+                }
+            } else {
+                $av_rating = "No ratings yet";
+            } 
+            
+
             // Query the database to fetch the recipe information for the provided recipe ID
-            $sql = "SELECT r.recipe_id, r.Name, r.Description AS RecipeDescription, r.Rating, r.Prep_time, r.Cook_time, GROUP_CONCAT(ri.Ingredient SEPARATOR ', ') AS Ingredients, rs.Step_number, rs.Description AS StepDescription
+            $sql = "SELECT r.recipe_id, r.Name, r.Description AS RecipeDescription, r.Rating, r.Prep_time, r.Cook_time, r.image_link, r.alt_text, GROUP_CONCAT(ri.Ingredient SEPARATOR ', ') AS Ingredients, rs.Step_number, rs.Description AS StepDescription
             FROM recipes r
             LEFT JOIN recipe_ingredients ri ON r.recipe_id = ri.recipe_id
             LEFT JOIN recipe_steps rs ON r.recipe_id = rs.recipe_id
@@ -58,9 +117,9 @@
             if ($result->num_rows > 0) {
                 $recipe = $result->fetch_assoc();
                 ?>
-                <img class="recipe-image" src="./images/Spaghetti-Bolognese.jpg" alt="Recipe Image">
+                <img class="recipe-image" src="<?php echo $recipe['image_link'] ?>" alt="<?php echo $recipe['alt_text'] ?>">
                 <h1><?php echo $recipe['Name']; ?></h1>
-                <h2>Rating: <?php echo $recipe['Rating']; ?></h2>
+                <h2>Rating: <?php echo $av_rating; ?></h2>
                 <?php 
                 //Radio buttons for rating system
                 echo "<div class='rating'>";
@@ -85,6 +144,7 @@
                 } else {
                     echo "<button class='save-rating' id=recipe value='" . $recipe['recipe_id'] . "' data-rating-id='" . $recipe['recipe_id'] . "'>Rate</button>";
                 }
+                
                 ?>
                 <p><b>Preparation time:</b> <?php echo $recipe['Prep_time']; ?></p>
                 <p><b>Cooking time:</b> <?php echo $recipe['Cook_time']; ?></p>
@@ -151,5 +211,13 @@ if (isset($recipe['Step_number']) && isset($recipe['StepDescription'])) {
 </div>
     <?php include 'Footer.php'?>
 
+
+        <!-- Assign the login status to a JavaScript variable -->
+    <script>
+        var isLoggedIn = <?php echo isset($_SESSION["user_id"]) ? "true" : "false"; ?>;
+    </script>
+
+    <!-- Include the external script.js file -->
+    <script src="script.js"></script>
 </body>
 </html>

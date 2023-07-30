@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2023 at 06:18 PM
+-- Generation Time: Jul 30, 2023 at 01:34 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,6 +33,16 @@ CREATE TABLE `ratings` (
   `user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `ratings`
+--
+
+INSERT INTO `ratings` (`recipe_id`, `rating`, `user`) VALUES
+(1, 5, 17),
+(2, 5, 17),
+(3, 5, 17),
+(4, 1, 17);
+
 -- --------------------------------------------------------
 
 --
@@ -45,19 +55,21 @@ CREATE TABLE `recipes` (
   `Description` varchar(255) NOT NULL,
   `Prep_time` varchar(255) NOT NULL,
   `Cook_time` varchar(255) NOT NULL,
-  `Rating` int(11) NOT NULL
+  `Rating` int(11) NOT NULL,
+  `image_link` varchar(255) NOT NULL,
+  `alt_text` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `recipes`
 --
 
-INSERT INTO `recipes` (`recipe_id`, `Name`, `Description`, `Prep_time`, `Cook_time`, `Rating`) VALUES
-(1, 'Spaghetti Bolognese', 'It consists of spaghetti served with a sauce made from tomatoes, minced beef, garlic, wine and herbs', '30 minutes', '1 to 2 hours', 5),
-(2, 'Vegan pancakes', 'Try this vegan fluffy American pancake recipe for a perfect start to the day. Serve these pancakes with fresh berries, maple syrup or chocolate sauce for a really luxurious start to the day.', '30 minutes', '10 to 30 minutes', 3),
-(3, 'Healthy pizza', 'No yeast required for this easy, healthy pizza, topped with colourful vegetables that\'s ready in 30 minutes.This is a great recipe if you want to feed the kids in a hurry!', '30 minutes', '10 to 30 minutes', 4),
-(4, 'Couscous salad', 'A nutritious and satisfying vegan couscous salad packed with colour, flavour and texture, from dried cranberries, pistachios and pine nuts.', '30 minutes', '10 minutes', 1),
-(5, 'Plum clafoutis', 'Halved plums are covered in a light batter and then baked in the oven to make this traditional French dessert. British plums are at their best in September, so make the most of them then and try this simple pud.', '30 minutes', '30 minutes to 1 hour', 5);
+INSERT INTO `recipes` (`recipe_id`, `Name`, `Description`, `Prep_time`, `Cook_time`, `Rating`, `image_link`, `alt_text`) VALUES
+(1, 'Spaghetti Bolognese', 'It consists of spaghetti served with a sauce made from tomatoes, minced beef, garlic, wine and herbs', '30 minutes', '1 to 2 hours', 5, './images/Spaghetti-Bolognese.jpg', 'Image of spaghetti bolognese, served in a bowl, next to some parmesan cheese'),
+(2, 'Vegan pancakes', 'Try this vegan fluffy American pancake recipe for a perfect start to the day. Serve these pancakes with fresh berries, maple syrup or chocolate sauce for a really luxurious start to the day.', '30 minutes', '10 to 30 minutes', 3, './images/Vegan-Pancakes.jpg', 'Image of a stack of vegan pancakes, topped with cream, golden syrup and blueberries'),
+(3, 'Healthy pizza', 'No yeast required for this easy, healthy pizza, topped with colourful vegetables that\'s ready in 30 minutes.This is a great recipe if you want to feed the kids in a hurry!', '30 minutes', '10 to 30 minutes', 4, './images/Healthy-Pizza.jpg', 'Image of a pizza with vegetables on, next to a pizza cutter'),
+(4, 'Couscous salad', 'A nutritious and satisfying vegan couscous salad packed with colour, flavour and texture, from dried cranberries, pistachios and pine nuts.', '30 minutes', '10 minutes', 1, './images/Couscous-Salad.jpg', 'Image of a couscous salad, served in a bowl with a spoon'),
+(5, 'Plum clafoutis', 'Halved plums are covered in a light batter and then baked in the oven to make this traditional French dessert. British plums are at their best in September, so make the most of them then and try this simple pud.', '30 minutes', '30 minutes to 1 hour', 5, './images/Plum-Clafoutis.jpg', 'Image of a plum clafoutis served in a baking dish, next to a spoon');
 
 -- --------------------------------------------------------
 
@@ -224,8 +236,7 @@ CREATE TABLE `saved_recipes` (
 --
 
 INSERT INTO `saved_recipes` (`id`, `user_id`, `recipe_id`, `saved_at`) VALUES
-(64, 1, 2, '2023-07-28 15:00:34'),
-(67, 1, 3, '2023-07-28 16:14:17');
+(76, 1, 1, '2023-07-29 16:28:00');
 
 -- --------------------------------------------------------
 
@@ -319,7 +330,7 @@ ALTER TABLE `recipes`
 -- AUTO_INCREMENT for table `saved_recipes`
 --
 ALTER TABLE `saved_recipes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `user`

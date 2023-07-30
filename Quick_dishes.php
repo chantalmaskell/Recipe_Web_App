@@ -13,7 +13,7 @@ LIMIT 3;";
             ?>
             <div class="small-card">
                 <a href="Recipe_details.php?recipe_id=<?php echo $recipe['recipe_id']; ?>">
-                    <img src="./images/Spaghetti-Bolognese.jpg" alt="Image of Spaghetti Bolognese" style="width:100%">
+                    <img src="<?php echo $recipe['image_link'] ?>" alt="<?php echo $recipe['alt_text'] ?>" style="width:100%">
                 </a>
                 <div class="small-container">
                     <h3><?php echo $recipe['Name']; ?></h3>
