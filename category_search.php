@@ -1,40 +1,40 @@
 <?php
-    session_start();
-    
-    // Function to establish a database connection
-    function connectToDatabase()
-    {
-        $host = 'localhost';
-        $dbname = 'recipe_login';
-        $db_username = 'root';
-        $db_password = 'root';
+session_start();
 
-        try {
-            $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $db_username, $db_password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $pdo;
-        } catch (PDOException $e) {
-            // Handle database connection errors
-            echo "Connection failed: " . $e->getMessage();
-            die();
-        }
+// Function to establish a database connection
+function connectToDatabase()
+{
+    $host = 'localhost';
+    $dbname = 'recipe_login';
+    $db_username = 'root';
+    $db_password = 'root';
+
+    try {
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $db_username, $db_password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $pdo;
+    } catch (PDOException $e) {
+        // Handle database connection errors
+        echo "Connection failed: " . $e->getMessage();
+        die();
     }
+}
 
 if (isset($_GET['category']) && $_GET['category'] != '') {
     $pdo = connectToDatabase();
     $category = $_GET['category'];
 
     echo "<h2>Recipe(s) in the " . htmlspecialchars($category) . " category </h2><hr>";
-    
+
     $recipe_sql = "SELECT recipe_id FROM recipe_categories WHERE Category = :category";
     $recipe_stmt = $pdo->prepare($recipe_sql);
     $recipe_stmt->bindParam(":category", $category, PDO::PARAM_STR);
     $recipe_stmt->execute();
 
     $recipe_result = $recipe_stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+
     if ($recipe_result) {
-        foreach($recipe_result as $row) {
+        foreach ($recipe_result as $row) {
             echo "Recipe ID: " . $row["recipe_id"] . "<br>";
 
             // Fetch category details
@@ -76,7 +76,6 @@ if (isset($_GET['category']) && $_GET['category'] != '') {
             } else {
                 echo "No details found for this recipe id.<br>";
             }
-            
 
             // Fetch recipe ingredients
             $ingredient_sql = "SELECT * FROM recipe_ingredients WHERE recipe_id = :recipe_id";
@@ -111,7 +110,7 @@ if (isset($_GET['category']) && $_GET['category'] != '') {
             } else {
                 echo "No steps found for this recipe id.<br>";
             }
-            
+
             echo "<br><hr>";
         }
     } else {
