@@ -67,14 +67,6 @@ if (isset($_SESSION["user_id"])) {
 
     <?php include 'primary-navigation.php'?>
 
-<!-- <div class="card">
-  <img src="./images/Spaghetti-Bolognese.jpg" alt="Image of Spaghetti Bolognese" style="width:100%">
-  <div class="container">
-    <h1>Our current favourite: <b>Garlic and Parmesan Spaghetti Bolognese</b></h1>
-    <p>Get all five of your five-a-day with this Spaghetti Bolognese. The hidden veg in the sauce makes it ideal for kids and you can freeze any leftovers</p>
-  </div>
-</div> -->
-
 <?php include 'secondary-navigation.php'?>
 
 <?php include './Components/Back_button.html'?>
@@ -101,10 +93,9 @@ if (isset($_SESSION["user_id"])) {
                             $recipeId = $recipe['recipe_id'];
 
                             $sql = "SELECT COUNT(*) FROM saved_recipes WHERE user_id = ? AND recipe_id = ?";
-                            $stmt = $sql_object->prepare($sql);
+                            $stmt = $pdo->prepare($sql);
                             $stmt->execute([$userId, $recipeId]);
                             $isSaved = $stmt->fetchColumn() > 0;
-                            // $isSaved = $stmt->get_result()->fetch_row()[0] > 0;
 
                         }
                     }

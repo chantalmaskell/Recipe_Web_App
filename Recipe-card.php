@@ -27,7 +27,7 @@
                 }
             } else {
                 $av_rating = "No ratings yet";
-            } 
+            }
     ?>
             <div class="small-card">
                 <a href="Recipe_details.php?recipe_id=<?php echo $recipe['recipe_id']; ?>">
