@@ -7,8 +7,8 @@
             <div class="row">
                 <ul>
                     <li><a href="">Back to top</a></li>
-                    <li><a href="">Explore range of recipes</a></li>
-                    <li><a href="">View your saved recipes</a></li>
+                    <li><a href="./search.php">Explore range of recipes</a></li>
+                    <li><a href="./savedRecipes.php">View your saved recipes</a></li>
                   </ul>
             </div>
         </section>

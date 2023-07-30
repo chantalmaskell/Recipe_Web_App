@@ -1,6 +1,6 @@
 <?php
 // Assuming you have the recipe ID and user ID
-$recipeId = $_POST['recipeId'];
+$recipeId = $_POST['recipe_id'];
 $userId = $_SESSION['user_id']; // Assuming user authentication is already implemented
 
 // Check if the recipe is already saved as a favorite for the user

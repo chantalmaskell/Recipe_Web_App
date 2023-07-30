@@ -86,8 +86,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
             <section class="Login-signup">
                 <!--Checks if session data is stored-->
                 <?php if (isset($_SESSION["user_id"])) : ?>
-
-                    <p>You are now logged in</p>
                     <!--Allows the user to log out-->
                     <p><a href="logout.php">Log out</a></p>
                     <!--Gives the user links to log in or sign up-->
@@ -95,7 +93,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove_recipe') {
                         <p>Please <a href="login_page.php">Log In</a> or <a href="signup_form.html">Sign Up</a> to rate recipes and view your saved recipes.</p>
                         <?php endif; ?>
                 </div>
-                        </section>
+                </section>
             <div class="column right">
         </div>
     </div> 
