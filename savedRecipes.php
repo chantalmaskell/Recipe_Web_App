@@ -8,6 +8,29 @@ if(!isset($_SESSION))
 // Include the database connection file (MySQLi version)
 $sql_var = require __DIR__ . "/database_connect.php";
 
+
+// Function to establish a database connection
+function connectToDatabase()
+{
+    $host = 'localhost';
+    $dbname = 'recipe_login';
+    $db_username = 'root';
+    $db_password = "";
+
+    try {
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $db_username, $db_password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $pdo;
+    } catch (PDOException $e) {
+        // Handle database connection errors
+        echo "Connection failed: " . $e->getMessage();
+        die();
+    }
+}
+$pdo = connectToDatabase();
+
+
+
 // Function to check if the user is logged in
 function isUserLoggedIn()
 {
@@ -21,8 +44,10 @@ if (isset($_SESSION["user_id"])) {
 
     // Prepare the SQL statement to search for recipes matching the query
     $sql = "SELECT r.* FROM recipes r inner join saved_recipes s on r.recipe_id=s.recipe_id WHERE s.user_id = '$user'";
-    $result = $sql_object->query($sql);
-    $recipes = $result->fetch_assoc();
+    $result = $pdo->query($sql);
+    // $recipes = $result->fetch_assoc();
+    $recipes = $result->fetchAll(PDO::FETCH_ASSOC);
+
 }
 
 ?>
@@ -76,9 +101,11 @@ if (isset($_SESSION["user_id"])) {
                             $recipeId = $recipe['recipe_id'];
 
                             $sql = "SELECT COUNT(*) FROM saved_recipes WHERE user_id = ? AND recipe_id = ?";
-                            $stmt = $pdo->prepare($sql);
+                            $stmt = $sql_object->prepare($sql);
                             $stmt->execute([$userId, $recipeId]);
                             $isSaved = $stmt->fetchColumn() > 0;
+                            // $isSaved = $stmt->get_result()->fetch_row()[0] > 0;
+
                         }
                     }
                     ?>
