@@ -121,28 +121,33 @@ if (isset($_GET['action']) && $_GET['action'] === 'save_rating') {
                 <h1><?php echo $recipe['Name']; ?></h1>
                 <h2>Rating: <?php echo $av_rating; ?></h2>
                 <?php 
-                //Radio buttons for rating system
-                echo "<div class='rating'>";
-                echo "<div class='star-icon'>";
-                echo "<input type='radio' name='rating' id='rating' value='1'>";
-                echo "<label for=rating class='star'>1</label>";
-                echo "<input type='radio' name='rating' id='rating' value='2'>";
-                echo "<label for=rating class='star'>2</label>";
-                echo "<input type='radio' name='rating' id='rating' value='3'>";
-                echo "<label for=rating class='star'>3</label>";
-                echo "<input type='radio' name='rating' id='rating' value='4'>";
-                echo "<label for=rating class='star'>4</label>";
-                echo "<input type='radio' name='rating' id='rating' value='5'>";
-                echo "<label for=rating class='star'>5</label>";
 
-                //check if the recipe has been rated by the user
-                $isRated = isRatingSaved($_SESSION["user_id"], $recipe['recipe_id']);
 
-                //if rated a message will appear. Otherwise a button will appear to rate
-                if ($isRated) {
-                    echo "<p>You have submitted a rating for this recipe</p>";
-                } else {
-                    echo "<button class='save-rating' id=recipe value='" . $recipe['recipe_id'] . "' data-rating-id='" . $recipe['recipe_id'] . "'>Rate</button>";
+                if (isUserLoggedIn()) {
+
+                    //Radio buttons for rating system
+                    echo "<div class='rating'>";
+                    echo "<div class='star-icon'>";
+                    echo "<input type='radio' name='rating' id='rating' value='1'>";
+                    echo "<label for=rating class='star'>1</label>";
+                    echo "<input type='radio' name='rating' id='rating' value='2'>";
+                    echo "<label for=rating class='star'>2</label>";
+                    echo "<input type='radio' name='rating' id='rating' value='3'>";
+                    echo "<label for=rating class='star'>3</label>";
+                    echo "<input type='radio' name='rating' id='rating' value='4'>";
+                    echo "<label for=rating class='star'>4</label>";
+                    echo "<input type='radio' name='rating' id='rating' value='5'>";
+                    echo "<label for=rating class='star'>5</label>";
+                    //check if the recipe has been rated by the user
+                    $isRated = isRatingSaved($_SESSION["user_id"], $recipe['recipe_id']);
+
+                    //if rated a message will appear. Otherwise a button will appear to rate
+                    if ($isRated) {
+                        echo "<p>You have submitted a rating for this recipe</p>";
+                    } else {
+                        echo "<button class='save-rating' id=recipe value='" . $recipe['recipe_id'] . "' data-rating-id='" . $recipe['recipe_id'] . "'>Rate</button>";
+                    }
+
                 }
                 
                 ?>
