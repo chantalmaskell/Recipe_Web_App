@@ -64,13 +64,13 @@ if (isset($_GET['search'])) {
 
     <?php include 'primary-navigation.php'?>
 
-<div class="card">
+<!-- <div class="card">
   <img src="./images/Spaghetti-Bolognese.jpg" alt="Image of Spaghetti Bolognese" style="width:100%">
   <div class="container">
     <h1>Our current favourite: <b>Garlic and Parmesan Spaghetti Bolognese</b></h1>
     <p>Get all five of your five-a-day with this Spaghetti Bolognese. The hidden veg in the sauce makes it ideal for kids and you can freeze any leftovers</p>
   </div>
-</div>
+</div> -->
 
 <?php include 'secondary-navigation.php'?>
 

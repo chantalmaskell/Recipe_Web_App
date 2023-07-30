@@ -44,7 +44,7 @@ $prepared_statement->bind_param("sss", $_POST["name"], $_POST["email"], $hashed_
 if ($prepared_statement->execute()) {
     
     //Redirects once completed
-    header("Location: successful_signup.html");
+    header("Location: successful_signup.php");
     exit;
 
 } else {
